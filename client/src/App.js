@@ -19,7 +19,7 @@ import AdminPastpaper from './components/screens/Admin/AdminPastpaper.js'
 // import { AuthorizeUser, ProtectRoute } from './middleware/auth'
 import PastPapers from './components/PastPapers/pastpaper';
 
-/** root routes */
+/** root routes */  
 export default function App() {
     const [notification, setNotification] = useState('');
   const navigate = useNavigate();
