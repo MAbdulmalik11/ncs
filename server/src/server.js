@@ -24,23 +24,50 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === "production";
+const configuredOrigins = (process.env.CLIENT_URI || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+const allowedOrigins = new Set([
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  ...configuredOrigins,
+]);
+
 app.use(cookieParser());
- 
+
+app.set("trust proxy", 1);
+
 app.use(session({
     secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || "superSecret",
     saveUninitialized: true,
     resave: true,
+    proxy: isProduction,
+    cookie: {
+      httpOnly: true,
+      sameSite: isProduction ? "none" : "lax",
+      secure: isProduction,
+    },
 }));
- 
+
 const corsOptions = {
-  origin: process.env.CLIENT_URI || 'http://localhost:3000',
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 };
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("common"));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 
 /** File Storage */
