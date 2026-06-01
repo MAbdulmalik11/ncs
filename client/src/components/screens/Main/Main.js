@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { CreatPost } from "../../CreatPost";
 import { Design } from "../../Design";
 // import { IconLike } from "../../IconLike";
@@ -92,7 +93,7 @@ export default function Main() {
         <div className="div-3">
           <div id="comp" className="meetups dark-46-on design-component-instance-node1">
             <div className="main-5">
-              <div className="text-wrapper-9" style={{fontSize : "15px"}}><a href="/register-competition">Onsite Registerations ! </a></div>
+              <div className="text-wrapper-9" style={{fontSize : "15px"}}><Link to="/register-competition">Onsite Registerations ! </Link></div>
             </div>
             {isLoadingCompetitions ? (
               <p>Loading competitions...</p>

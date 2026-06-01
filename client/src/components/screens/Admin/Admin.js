@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Meetups } from "../../Meetups";
 import { PopularTags } from "../../PopularTags";
 import { Bitcoin3 } from "../../../icons/Bitcoin3";
@@ -233,7 +234,7 @@ const handleModal2Submit = async (competitionData) => {
       <div className="div-3">
           <div id="comp" className="meetups dark-46-on design-component-instance-node1">
             <div className="main-5">
-              <div className="text-wrapper-9" style={{fontSize : "15px"}}><a href="/register-competition">Onsite Registerations ! </a></div>
+              <div className="text-wrapper-9" style={{fontSize : "15px"}}><Link to="/register-competition">Onsite Registerations ! </Link></div>
             </div>
             {isLoadingCompetitions ? (
               <p>Loading competitions...</p>
