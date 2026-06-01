@@ -9,7 +9,7 @@ import Admin from './components/screens/Admin/Admin';
 import Main  from './components/screens/Main/Main';
 import Profile from './components/screens/Profile/Box.jsx';
 import FspcLogin from './components/screens/FspcLogin/FspcLogin';
-import Notification from './components/Notification/Notification.tsx';
+import Notification from './components/Notification/Notification';
 import RegistrationPage from './components/screens/Registrations/registration.js';
 import AdminLogin from './components/screens/Admin/AdminLogin.js';
 import AdminPastpaper from './components/screens/Admin/AdminPastpaper.js'
