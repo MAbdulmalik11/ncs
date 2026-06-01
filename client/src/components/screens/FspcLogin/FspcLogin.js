@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import "./style.css";
+import { apiUrl } from "../../../helper/api";
 
 export default function FspcLogin() {
   const [username, setUsername] = useState('');
@@ -12,7 +13,7 @@ export default function FspcLogin() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/me', {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -37,7 +38,7 @@ export default function FspcLogin() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch(apiUrl("/api/login"), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

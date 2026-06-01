@@ -11,12 +11,13 @@ import "./header.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from "../../helper/api";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
-    const response = await fetch('http://localhost:8080/api/logout', {
+    const response = await fetch(apiUrl("/api/logout"), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ export const Header = ({ page }) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/me", {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           credentials: 'include'
         });

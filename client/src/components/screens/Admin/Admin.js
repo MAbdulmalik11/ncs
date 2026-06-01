@@ -9,11 +9,12 @@ import { Vector173 } from "../../../icons/Vector173";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { AdminHeader } from '../../Header/AdminHeader';
+import { apiUrl } from "../../../helper/api";
 
 
 const fetchData = async () => {
   try {
-    const response = await fetch("http://localhost:8080/api/competitions");
+    const response = await fetch(apiUrl("/api/competitions"));
     const result = await response.json();
     return result;
   } catch (error) {
@@ -36,7 +37,7 @@ export default function Admin() {
   useEffect(() => {
     const fetchOnSiteCompeitions = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/get-onsite-competitions");
+        const response = await fetch(apiUrl("/api/get-onsite-competitions"));
         const result = await response.json();
         console.log(result)
         setonSiteCompetitions(result);
@@ -49,7 +50,7 @@ export default function Admin() {
 
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/me", {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           credentials: 'include'
         });
@@ -105,7 +106,7 @@ export default function Admin() {
       url = "register-onsite-competition";
     }
     try {
-      const response = await fetch("http://localhost:8080/api/" + url, {
+      const response = await fetch(apiUrl(`/api/${url}`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +169,7 @@ const handleModal2Submit = async (competitionData) => {
     console.log("Competition Data:", competitionData);
     const url = "admin-onsite-competition";
   try {
-    const response = await fetch("http://localhost:8080/api/" + url, {
+    const response = await fetch(apiUrl(`/api/${url}`), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

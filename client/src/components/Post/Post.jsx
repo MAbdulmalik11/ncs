@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { IconLike } from "../IconLike";
 import "./style.css";
 import { toast } from "react-toastify";
+import { apiUrl } from "../../helper/api";
 
 
 export const Post = ({
@@ -39,7 +40,7 @@ export const Post = ({
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/me", {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           credentials: 'include'
         });
@@ -78,7 +79,7 @@ export const Post = ({
         text3,
         userId: userInfo.id
       };
-      const response = await fetch("http://localhost:8080/posts/update-likes", {
+      const response = await fetch(apiUrl("/posts/update-likes"), {
         method: 'PUT',
         credentials: 'include',
         headers: { "Content-Type": "application/json" },
@@ -127,7 +128,7 @@ export const Post = ({
     }
     setIsSubmittingComment(true);
     try {
-      const response = await fetch(`http://localhost:8080/posts/${idd}/comment`, {
+      const response = await fetch(apiUrl(`/posts/${idd}/comment`), {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

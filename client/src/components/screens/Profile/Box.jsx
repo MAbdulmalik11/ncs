@@ -3,6 +3,7 @@ import { Header } from "../../Header";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { apiUrl } from "../../../helper/api";
 
 
 const ProfileEditModal = ({ onClose, onSave }) => {
@@ -37,7 +38,7 @@ export default function Box() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/me", {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           credentials: 'include'
         });
@@ -84,7 +85,7 @@ export default function Box() {
 
   const updateProfilePicture = async (base64Image) => {
     try {
-      const response = await fetch("http://localhost:8080/api/update-profile-picture", {
+      const response = await fetch(apiUrl("/api/update-profile-picture"), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ export default function Box() {
 
   const saveUpdatedAboutMe = async (updatedAboutMe) => {
     try {
-      const response = await fetch("http://localhost:8080/api/update-profile", {
+      const response = await fetch(apiUrl("/api/update-profile"), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

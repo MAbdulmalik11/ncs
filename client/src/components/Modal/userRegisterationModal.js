@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import "./style.css";
+import { apiUrl } from "../../helper/api";
 
 function RegisterationModal({ isOpen, onClose, onSubmit, mode, selectedTag }) {
     const [title, setTitle] = useState("");
@@ -17,7 +18,7 @@ function RegisterationModal({ isOpen, onClose, onSubmit, mode, selectedTag }) {
     useEffect(() => {
         const fetchOnSiteCompeitionsTitles = async () => {
             try {
-                const response = await fetch("http://localhost:8080/api/get-onsite-competitions");
+                const response = await fetch(apiUrl("/api/get-onsite-competitions"));
                 const result = await response.json();
                 console.log(result)
                 setonCompetitionsTitles(result);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import "./AdminLogin.css";
+import { apiUrl } from "../../../helper/api";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -12,7 +13,7 @@ export default function AdminLogin() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/me', {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -35,7 +36,7 @@ export default function AdminLogin() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/api/admin/login', {
+      const response = await fetch(apiUrl("/api/admin/login"), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

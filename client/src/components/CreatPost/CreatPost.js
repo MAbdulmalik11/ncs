@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import TextareaAutosize from 'react-textarea-autosize';
 import "./style.css";
 import { toast } from "react-toastify";
+import { apiUrl } from "../../helper/api";
 
 export const CreatPost = ({ dark, className, onPostCreated ,profilepicture}) => {
   const [postContent, setPostContent] = useState("");
@@ -13,7 +14,7 @@ export const CreatPost = ({ dark, className, onPostCreated ,profilepicture}) => 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/me", {
+        const response = await fetch(apiUrl("/api/me"), {
           method: 'GET',
           credentials: 'include'
         });
@@ -49,7 +50,7 @@ export const CreatPost = ({ dark, className, onPostCreated ,profilepicture}) => 
     };
 
     try {
-      const response = await fetch("http://localhost:8080/posts/postcreate", {
+      const response = await fetch(apiUrl("/posts/postcreate"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

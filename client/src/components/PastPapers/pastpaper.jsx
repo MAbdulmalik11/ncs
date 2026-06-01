@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './pastpaper.css'
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../Header';
+import { apiUrl } from "../../helper/api";
 const fetchData = async () => {
     try {
-        const response = await fetch("http://localhost:8080/api/pastpapers");
+        const response = await fetch(apiUrl("/api/pastpapers"));
         const result = await response.json();
         return result;
     } catch (error) {

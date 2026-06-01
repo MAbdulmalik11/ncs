@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { apiUrl } from "../../../helper/api";
 
 export default function FspcSignup() {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ export default function FspcSignup() {
 
   const sendDataToBackend = async (data) => {
     try {
-      const response = await fetch('http://localhost:8080/api/register', {
+      const response = await fetch(apiUrl("/api/register"), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
