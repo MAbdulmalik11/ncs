@@ -27,13 +27,13 @@ dotenv.config();
 app.use(cookieParser());
  
 app.use(session({
-    secret: "superSecret",
+    secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || "superSecret",
     saveUninitialized: true,
     resave: true,
 }));
  
 const corsOptions = {
-  origin: 'http://localhost:3000' ,// Update with your frontend's origin
+  origin: process.env.CLIENT_URI || 'http://localhost:3000',
   credentials: true,
 };
 app.use(helmet());
@@ -58,7 +58,7 @@ const storage = multer.diskStorage({
 app.use(express.json());
 app.disable('x-powered-by');  //less hackers know about our stack
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 /** HTTP GET Request */
 app.get('/', (req, res) => {
