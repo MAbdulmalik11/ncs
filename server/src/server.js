@@ -25,15 +25,6 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const isProduction = process.env.NODE_ENV === "production";
-const configuredOrigins = (process.env.CLIENT_URI || "")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-const allowedOrigins = new Set([
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-  ...configuredOrigins,
-]);
 
 app.use(cookieParser());
 
@@ -53,11 +44,8 @@ app.use(session({
 
 const corsOptions = {
   origin(origin, callback) {
-    if (!origin || allowedOrigins.has(origin)) {
-      return callback(null, true);
-    }
-
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
+    // Demo mode: reflect any origin so credentialed requests work from any frontend.
+    return callback(null, true);
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
